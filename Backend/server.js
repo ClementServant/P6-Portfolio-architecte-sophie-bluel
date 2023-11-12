@@ -45,7 +45,7 @@ server.on('listening', () => {
 });
 
 app.get('/', (req, res) => {
-	res.send("hello, World")
+	res.send("")
 })
 server.listen(port);
 
