@@ -1,4 +1,4 @@
-// ! Récupération de l’Élément <div classe="#login"> depuis le DOM
+// ! Récupération de l’Élément <div classe="login"> depuis le DOM
 const loginSection = document.querySelector(".login")
 // * Ajout des style pour L’élément <section class="login">
 loginSection.style.display = "flex";
@@ -7,7 +7,7 @@ loginSection.style.justifyContent = "center";
 loginSection.style.alignItems = "center";
 loginSection.style.gap = "37px";
 
-// ! Function pour les style des element
+// ! Function pour les style des éléments
 
 // * élément <h2>
 function styleTitre(h2Element) {
@@ -127,13 +127,8 @@ loginSection.appendChild(formElement)
 
 // + Ajout des éléments enfant au formulaire 
 formElement.appendChild(labelEmail)
-/* formElement.appendChild(document.createElement("br")) */
 formElement.appendChild(inputEmail)
-/* formElement.appendChild(document.createElement("br")) */
 formElement.appendChild(labelPassword)
-/* formElement.appendChild(document.createElement("br")) */
 formElement.appendChild(inputPassword)
-/* formElement.appendChild(document.createElement("br")) */
 formElement.appendChild(buttonElement)
-/* formElement.appendChild(document.createElement("br")) */
 formElement.appendChild(paragrapheElement)
