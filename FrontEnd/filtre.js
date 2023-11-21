@@ -1,98 +1,55 @@
 async function divFiltre() {
 
-    // ! Récupération des Projet depuis l'API
+    // ! Récupération des Projets depuis l'API
     const responseProject = await fetch("http://localhost:5678/api/works")
     const Project = await responseProject.json()
     console.log(Project)
 
-    // ! Function Ajout styles éléments <button> 
-    function styleButton(buttonElement) {
-        buttonElement.style.width = "auto";
-        buttonElement.style.height = "37px";
-        buttonElement.style.borderRadius = "60px";
-        buttonElement.style.border = "1px solid #1D6154";
-        buttonElement.style.color = "#1D6154";
-        buttonElement.style.background = "#FFFFFF";
-        buttonElement.style.textAlign = "center";
-        buttonElement.style.fontFamily = "Syne";
-        buttonElement.style.fontSize = "16px";
-        buttonElement.style.fontStyle = "normal";
-        buttonElement.style.fontWeight = "700";
-        buttonElement.style.lineHeight = "normal";
-        buttonElement.style.padding = "9px 11px 9px 9px";
-        buttonElement.style.cursor = "pointer";
-    }
+    const responseCategories = await fetch("http://localhost:5678/api/categories")
+    const categories = await responseCategories.json()
+    console.log(categories)
 
-    function afficherLesProjetParFiltre(Project) {
+    function afficherLesProjetParFiltre(filtredesProjects) {
         const gallery = document.querySelector(".gallery")
         gallery.innerHTML = ""
+
+        filtredesProjects.forEach(project => {
+            // * Créer et ajouter les éléments d'affichage pour chaque projet
+            const image = document.createElement("img");
+            image.src = project.imageUrl; 
+            gallery.appendChild(image);
+        });
     }
 
     // ! Récupération de l’élément <div class:"filtre"> depuis le DOM
-    const filtreDiv = document.querySelector(".filtre")
-
-    // + Ajout des styles css a l’élément <div class:"filtre">
-    filtreDiv.style.display = "flex";
-    filtreDiv.style.flexDirection = "row";
-    filtreDiv.style.alignItems = "center";
-    filtreDiv.style.justifyContent = "center";
-    filtreDiv.style.gap = "10px";
-    filtreDiv.style.margin = "51px 0";
+    const filtreDiv = document.querySelector(".filter")
 
     const tous = document.createElement("button")
     tous.innerText = "Tous"
-    styleButton(tous)
-
-    const objets = document.createElement("button")
-    objets.innerText = "Objets"
-    styleButton(objets)
-
-    const appartements = document.createElement("button")
-    appartements.innerText = "Appartements"
-    styleButton(appartements)
-
-    const hotelsRestaurants = document.createElement("button")
-    hotelsRestaurants.innerText = "Hôtels & restaurants"
-    styleButton(hotelsRestaurants)
-
-    filtreDiv.appendChild(tous)
-    filtreDiv.appendChild(objets)
-    filtreDiv.appendChild(appartements)
-    filtreDiv.appendChild(hotelsRestaurants)
-
-    // + Ajout des eventListener aux boutons filtre
-
     // ! Filtre Tous
     tous.addEventListener("click", () => {
-        const tousFiltre = Project.filter(() => {
-            return true;
-        })
-        console.log(tousFiltre)
+        const tousFiltre = Project;
+        //console.log(tousFiltre)
+        afficherLesProjetParFiltre(tousFiltre);
     })
+    filtreDiv.appendChild(tous)
 
-    // ! Filtre Objets
-    objets.addEventListener("click",  function () {
-        const objetsFiltre = Project.filter((Project) => {
-            return Project.category.name === "Objets";
-        })
-        console.log(objetsFiltre)
-    })
+    // + Création et ajout des boutons catégorie dynamiquement
+    categories.forEach(category => {
+        const button = document.createElement("button");
+        button.innerText = category.name;
 
-    // ! Filtre Appartements
-    appartements.addEventListener("click", () => {
-        const appartementsFiltre = Project.filter((Project) => {
-            return Project.category.name === "Appartements";
-        })
-        console.log(appartementsFiltre)
-    })
+        button.addEventListener("click", () => {
+            const filtreProject = Project.filter(project => {
+                return project.category.id === category.id;
+            });
+            //console.log(filtreProject);
+            afficherLesProjetParFiltre(filtreProject);
+        });
 
-    // ! Filtre Hôtels & restaurants
-    hotelsRestaurants.addEventListener("click", () => {
-        const hotelsRestaurantsFiltre = Project.filter((Project) => {
-            return Project.category.name === "Hotels & restaurants";
-        })
-        console.log(hotelsRestaurantsFiltre)
-    })
+        filtreDiv.appendChild(button);
+    });
+
 }
 
-divFiltre()
+await divFiltre();

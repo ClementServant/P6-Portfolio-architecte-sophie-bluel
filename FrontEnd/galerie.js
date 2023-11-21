@@ -35,6 +35,6 @@ async function galerieProjects() {
 }
 
 // ! Appel de ma function
-galerieProjects()
+await galerieProjects()
 
 
