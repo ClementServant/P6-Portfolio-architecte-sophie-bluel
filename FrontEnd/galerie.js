@@ -1,12 +1,12 @@
-// + Recuperation de la galerie depuis Le DOM
-const gallery = document.querySelector(".gallery")
-
 // + Creation function mode asynchrone
 async function galerieProjects() {
 
     const response = await fetch("http://localhost:5678/api/works")
     const data = await response.json()
     console.log(data);
+
+    // + Recuperation de la galerie depuis Le DOM
+    const gallery = document.querySelector(".gallery")
 
     // + Création boucle for pour Parcourir les données récupérer par l'API
     for (let i = 0; i < data.length; i++) {
@@ -35,6 +35,5 @@ async function galerieProjects() {
 }
 
 // ! Appel de ma function
-await galerieProjects()
-
+await galerieProjects() 
 

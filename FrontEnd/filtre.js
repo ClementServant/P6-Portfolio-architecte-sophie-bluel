@@ -4,20 +4,26 @@ async function divFiltre() {
     const responseProject = await fetch("http://localhost:5678/api/works")
     const Project = await responseProject.json()
     console.log(Project)
-
+     
+    // ! Récupération des Catégories depuis l'API
     const responseCategories = await fetch("http://localhost:5678/api/categories")
     const categories = await responseCategories.json()
     console.log(categories)
 
-    function afficherLesProjetParFiltre(filtredesProjects) {
+    function afficherLesProjetsParFiltre(filtresDesProjects) {
         const gallery = document.querySelector(".gallery")
         gallery.innerHTML = ""
 
-        filtredesProjects.forEach(project => {
-            // * Créer et ajouter les éléments d'affichage pour chaque projet
-            const image = document.createElement("img");
-            image.src = project.imageUrl; 
-            gallery.appendChild(image);
+        filtresDesProjects.forEach(project => {
+            const figureElement = document.createElement("figure")
+            gallery.appendChild(figureElement)
+            const imageElement = document.createElement("img")
+            imageElement.src = project.imageUrl
+            imageElement.alt = project.title
+            figureElement.appendChild(imageElement)
+            const figcaptionElement = document.createElement("figcaption")
+            figcaptionElement.innerText = project.title
+            figureElement.appendChild(figcaptionElement)
         });
     }
 
@@ -28,28 +34,24 @@ async function divFiltre() {
     tous.innerText = "Tous"
     // ! Filtre Tous
     tous.addEventListener("click", () => {
-        const tousFiltre = Project;
-        //console.log(tousFiltre)
-        afficherLesProjetParFiltre(tousFiltre);
+        const tousFiltres = Project;
+        afficherLesProjetsParFiltre(tousFiltres);
     })
     filtreDiv.appendChild(tous)
 
-    // + Création et ajout des boutons catégorie dynamiquement
+    // + Ajout des boutons par catégorie
     categories.forEach(category => {
         const button = document.createElement("button");
         button.innerText = category.name;
 
         button.addEventListener("click", () => {
-            const filtreProject = Project.filter(project => {
+            const filtreCategories = Project.filter(project => {
                 return project.category.id === category.id;
             });
-            //console.log(filtreProject);
-            afficherLesProjetParFiltre(filtreProject);
+            afficherLesProjetsParFiltre(filtreCategories);
         });
-
         filtreDiv.appendChild(button);
     });
-
 }
 
 await divFiltre();
