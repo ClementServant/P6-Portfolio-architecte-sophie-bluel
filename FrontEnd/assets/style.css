@@ -53,10 +53,42 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+/*** Overlay ***/
+.overlay {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 59px;
+	background: #000;
+	gap: 11px;
+}
+
+.fa-pen-to-square {
+	color: #fff;
+	width: 15px;
+	height: 15px;
+}
+
+.overlay a {
+	text-decoration: none;
+	color: #fff;
+	font-family: Work Sans;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	text-align: center;
+}
+/*** fin style overlay ***/
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 80px 0
+	
 }
 section {
 	margin: 50px 0
@@ -152,7 +184,7 @@ li:hover {
 }
  /*** Ajout des style pour les éléments button ***/ 
 
- button {
+button {
 	width: auto;
 	height: 37px;
 	border-radius: 37px;
@@ -167,7 +199,7 @@ li:hover {
 	line-height: normal;
 	padding: 9px 11px 9px 9px;
 	cursor: pointer;
-}
+} 
 #contact {
 	width: 50%;
 margin: auto;
@@ -215,4 +247,24 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+/*** Ajout de la boite modal ***/
 
+.modal {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	background: #fff;
+}
+
+.modal-wrapper {
+	width: 630px;
+	height: 688px;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vh - 20px);
+}
