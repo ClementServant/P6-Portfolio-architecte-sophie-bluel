@@ -3,7 +3,6 @@ async function galerieProjects() {
 
     const response = await fetch("http://localhost:5678/api/works")
     const data = await response.json()
-    console.log(data);
 
     // + Recuperation de la galerie depuis Le DOM
     const gallery = document.querySelector(".gallery")
