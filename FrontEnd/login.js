@@ -2,7 +2,7 @@
 const loginForm = document.getElementById("login-form")
 
 // + Ajout event listener sur le bouton SUBMIT
-loginForm.addEventListener("submit", function (event) {
+loginForm.addEventListener("submit", async function (event) {
 
     // ! Éviter le rechargement de la page 
     event.preventDefault();
@@ -11,31 +11,30 @@ loginForm.addEventListener("submit", function (event) {
     const email = document.getElementById("email").value 
     const password = document.getElementById("password").value
 
-    /* const formData = {
-      email: "sophie.bluel@test.tld",
-      password: "S0phie"
+    const formData = {
+      email: email,
+      password: password
     }
 
-    fetch("http://localhost:5678/api/users/login", {
-      method: 'POST',
-      Headers: {
-         'Content-Type': 'application/json',
-         'accept': 'application/json' 
-      },
-      body: JSON.stringify(formData)
-    }) */
-   
-    // + Ajout de la function email et mot de passe
-     function authentificationEmailEtMotDePasse(email, password) {
-         if (email === "sophie.bluel@test.tld" && password === "S0phie") {
-            // + Identifiant correct redirection vers la page d’accueil
-            alert("Connexion réussite ! Redirection vers la page d’accueil.")
-            window.location.href = "index.html"
-         } else {
-            // + Identifiant incorrect affichage du message d'erreur
-            alert("Identifiant ou mot de passe incorrect ! Veuillez réessayer.")
-         }
+    async function fetchUtilisateur () {
+      const response = await fetch("http://localhost:5678/api/users/login", {
+        method: "POST",
+        headers: {
+          "accept": "application/json",
+          "content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      if (response === 200) {
+        const data = await response.json()
+        const token = data.token
+        localStorage.setItem("token", token)
+        alert("Connection réussie ! Redirection vers la page d’accueil")
+        window.location.href = "index.html"
+      } else (response === 401 || response === 404); {
+        alert("Identifient ou mot de passe incorrect ! Veuillez réessayer");
+      }
     }
-    authentificationEmailEtMotDePasse(email, password)
+    await fetchUtilisateur()
 })
 
