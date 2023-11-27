@@ -1,4 +1,3 @@
-// ! Récupération de l'element <form> depuis le DOM
 const loginForm = document.getElementById("login-form")
 
 // + Ajout de l’écouteur d’événement sur le bouton SUBMIT
@@ -34,10 +33,12 @@ loginForm.addEventListener("submit", async function (event) {
         localStorage.setItem("token", token)
         alert("Connection réussie ! Redirection vers la page d’accueil")
         window.location.href = "index.html"
-      } else (response.status === 401 || response.status === 404); {
-        alert("Identifient ou mot de passe incorrect ! Veuillez réessayer");
+      } else {
+        alert("Erreur dans l’identifiant ou le mot de passe")
       }
     }
     await fetchUtilisateur()
 })
+
+
 
