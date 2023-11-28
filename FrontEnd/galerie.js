@@ -1,3 +1,10 @@
+// + Ajout de la fonction de déconnexion
+function déconnexionUtilisateur() {
+    localStorage.removeItem("token");
+    alert("Vous êtes déconnecté")
+    window.location.reload(); 
+}
+
 // + Creation function mode asynchrone
 async function galerieProjects() {
 
@@ -32,7 +39,21 @@ async function galerieProjects() {
         figureElement.appendChild(figcaptionElement)
     }
 }
-
 // ! Appel de ma function
 await galerieProjects() 
+
+window.onload = function () {
+    const token = localStorage.getItem("token")
+    const overlay = document.querySelector(".overlay")
+    
+    if (token) {
+        console.log("Token trouvé :", token)
+        overlay.classList.remove("hidden")
+    } 
+
+    const logoutButton = document.getElementById("logoutButton");
+    if (logoutButton) {
+        logoutButton.onclick = déconnexionUtilisateur;
+    }
+}
 

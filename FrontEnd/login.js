@@ -15,6 +15,7 @@ loginForm.addEventListener("submit", async function (event) {
       email: email,
       password: password
     }
+
     // + function asynchrone requête API
     async function fetchUtilisateur () {
       // ! Méthode fetch requête post a l'API + entête + corp de la requête.
