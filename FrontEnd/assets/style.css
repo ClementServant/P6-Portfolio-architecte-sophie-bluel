@@ -55,7 +55,7 @@ body {
 }
 /*** Overlay une fois la connection réussie ***/
 .overlay {
-	position: fixed;
+	position: absolute;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -65,11 +65,8 @@ body {
 	height: 59px;
 	background: #000;
 	gap: 11px;
+	margin-bottom: 38px;
 }
-
-.hidden {
-	display: none;
-} 
 
 .fa-pen-to-square {
 	color: #fff;
@@ -77,7 +74,7 @@ body {
 	height: 15px;
 }
 
-.overlay a {
+.overlay p {
 	text-decoration: none;
 	color: #fff;
 	font-family: Work Sans;
@@ -88,6 +85,29 @@ body {
 	text-align: center;
 }
 /*** fin style overlay ***/
+.hidden {
+	display: none;
+}
+/*** Affichage SPAN une fois connecter ***/
+.span {
+	margin-left: 31px;	
+}
+
+.span svg {
+	margin-right: 11px;
+}
+
+.span a {
+	text-decoration: none;
+	color: #000;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+/*** Fin des style du span ***/
 header {
 	display: flex;
 	justify-content: space-between;
@@ -253,22 +273,3 @@ footer nav ul {
 }
 /*** Ajout de la boite modal ***/
 
-.modal {
-	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	border-radius: 10px;
-	background: #fff;
-}
-
-.modal-wrapper {
-	width: 630px;
-	height: 688px;
-	max-width: calc(100vw - 20px);
-	max-height: calc(100vh - 20px);
-}
