@@ -6,10 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (token) {
         const overlay = document.querySelector(".overlay")
         const span = document.querySelector(".span")
+        const headerMargin = document.getElementById("header")
         
         // ! Affichage des element si utilisateur connecté
         overlay.classList.remove("hidden")
         span.classList.remove("hidden")
+        headerMargin.classList.add("login")
 
         // ! Modification de l'apparence du lien de la navbar
         const login = document.querySelector("nav ul li a")
@@ -23,7 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // ! Réinitialisation de l'apparence du lien de la navbar
             login.innerText = "login"
+            alert("Vous êtes déconnecter")
             window.location.href = "index.html"
+            console.log("Vous avez ete rediriger vers la page d’accueil")
         })
     }
 })

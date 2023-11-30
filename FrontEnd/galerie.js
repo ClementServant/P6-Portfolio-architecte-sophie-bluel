@@ -35,30 +35,4 @@ async function galerieProjects() {
 // ! Appel de ma function
 await galerieProjects() 
 
-console.log("vous avez été rediriger")
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("la page a été charger")
 
-    const token = localStorage.getItem("token")
-    const overlay = document.querySelector(".overlay")
-    const span = document.querySelector(".span")
-
-    // ! condition si le token a été récupérer
-    if (token) {
-        overlay.classList.remove("hidden")
-        span.classList.remove("hidden")
-    } 
-
-    // ! Modification de l'élément <a> de la navbar
-    const login = document.querySelector("nav ul li a")
-    login.innerText = "logout"
-    login.href = "index.html"
-    
-    login.addEventListener("click", () => {
-        localStorage.removeItem("token")
-
-        login.innerText = "login"
-        login.href = "login.html"
-        window.location.href = "index.html"
-    })
-})

@@ -85,10 +85,16 @@ body {
 	text-align: center;
 }
 /*** fin style overlay ***/
+
+/*** Affichage SPAN une fois connecter ***/
 .hidden {
 	display: none;
 }
-/*** Affichage SPAN une fois connecter ***/
+
+.login {
+	margin: 97px 0;
+}
+
 .span {
 	margin-left: 31px;	
 }
@@ -112,7 +118,6 @@ header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
-	
 }
 section {
 	margin: 50px 0
@@ -271,5 +276,78 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+
 /*** Ajout de la boite modal ***/
 
+.modal {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+}
+.modal-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: auto;
+	background-color: #fff;
+	border-radius: 10px;
+	width: 630px;
+	height: 688px;
+	position: relative;
+}
+
+.fa-xmark {
+	position: absolute;
+	top: 26px;
+	right: 30px;
+	cursor: pointer;
+}
+
+.titre-modal {
+	color: #000;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal; 
+	margin-top: 60px;
+}
+
+.projet-modal{
+	background-color: pink;
+	width: 419px;
+	height: 474px;
+	margin-top: 46px;
+	margin-bottom: 67px;
+}
+
+.projet-modal::after {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 420px;
+	height: 1px;
+	background: #B3B3B3;
+	bottom: 119px; 
+}
+  
+
+.btn-modal {
+	margin-bottom: 45px;
+	background: #1D6154;
+	color: #FFF;
+	padding: 10px 49px 9px 46px;
+	text-align: center;
+	font-family: Syne;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
