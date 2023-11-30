@@ -1,10 +1,3 @@
-// + Ajout de la fonction de déconnexion
-function déconnexionUtilisateur() {
-    localStorage.removeItem("token");
-    alert("Vous êtes déconnecté")
-    window.location.reload(); 
-}
-
 // + Creation function mode asynchrone
 async function galerieProjects() {
 
@@ -42,18 +35,30 @@ async function galerieProjects() {
 // ! Appel de ma function
 await galerieProjects() 
 
-window.onload = function () {
+console.log("vous avez été rediriger")
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("la page a été charger")
+
     const token = localStorage.getItem("token")
     const overlay = document.querySelector(".overlay")
-    
+    const span = document.querySelector(".span")
+
+    // ! condition si le token a été récupérer
     if (token) {
-        console.log("Token trouvé :", token)
         overlay.classList.remove("hidden")
+        span.classList.remove("hidden")
     } 
 
-    const logoutButton = document.getElementById("logoutButton");
-    if (logoutButton) {
-        logoutButton.onclick = déconnexionUtilisateur;
-    }
-}
+    // ! Modification de l'élément <a> de la navbar
+    const login = document.querySelector("nav ul li a")
+    login.innerText = "logout"
+    login.href = "index.html"
+    
+    login.addEventListener("click", () => {
+        localStorage.removeItem("token")
 
+        login.innerText = "login"
+        login.href = "login.html"
+        window.location.href = "index.html"
+    })
+})
