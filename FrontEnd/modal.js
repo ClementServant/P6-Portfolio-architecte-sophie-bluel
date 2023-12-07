@@ -1,58 +1,63 @@
-// ! variable pour savoir quel boite modale est ouvert
-let modal = null
+document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.querySelector('#modal')
+    const openModal = document.querySelector('#open-modal')
+    const closeModal = document.querySelector('#close-modal')
 
+    openModal.addEventListener('click', async () => {
+        const token = localStorage.getItem('token')
+        if (!token) {
+            window.location.href = 'login.html'
+        }
+        modal.showModal()
 
-document.addEventListener("DOMContentLoaded", () => {
+        const response = await fetch('http://localhost:5678/api/works', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
 
-    // + Function d'ouverture de la boite modal
-    const openModal = function (event) {
-        event.preventDefault()
-        const target = document.querySelector(event.target.getAttribute("href"))
-        target.style.display = null
-        target.removeAttribute("aria-hidden")
-        target.setAttribute("aria-modal", "true")
-        modal = target
-        // - Fermer la boite modale
-        modal.addEventListener("click", closeModal)
-        document.querySelector(".js-modal-close").addEventListener("click", closeModal)
-        document.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
+        const data = await response.json()
+        const apiContainer = document.querySelector('#api-container')
+        apiContainer.innerHTML = ''
 
-    }
-    // ! Creation de la function pour fermer la boite modale
-    const closeModal = function (event) {
-        if (modal === null) return
-        event.preventDefault()
-        modal.style.display = "none"
-        modal.setAttribute("aria-hidden", "true")
-        modal.removeAttribute("aria-modal")
-        modal.removeEventListener("click", closeModal)
-        document.querySelector(".js-modal-close").removeEventListener("click", closeModal)
-        document.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation)
+        for (let i = 0; i < data.length; i++) {
+            const imageContainer = document.createElement('div')
+            imageContainer.classList.add('image-container')
 
-        modal = null
-    }
-    // ! Éviter de fermer la boite modal en cliquant a l’intérieure
-    const stopPropagation = function (event) {
-        event.stopPropagation()
-    }
+            const imageElement = document.createElement('img')
+            imageElement.src = data[i].imageUrl
+            imageElement.classList.add('api-container-image')
 
-    document.querySelectorAll(".modal-js").forEach(a => {
-        a.addEventListener("click", openModal)
-    })
+            const btnSupprimer = document.createElement('button')
+            btnSupprimer.classList.add('btn-image-sup')
 
-    // ! Fermer la boite modal avec le bouton Echap
-    window.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" || event.key === "Esc") {
-            closeModal(event)
+            const iconSupprimer = document.createElement('i')
+            iconSupprimer.classList.add('fa-solid', 'fa-trash-can')
+
+            apiContainer.appendChild(imageContainer)
+
+            imageContainer.appendChild(imageElement)
+            imageContainer.appendChild(btnSupprimer)
+
+            btnSupprimer.appendChild(iconSupprimer)
+
+            btnSupprimer.addEventListener('click', async () => {
+                const id = data[i].id
+                console.log(id)
+                const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+            })
         }
     })
-});
-
-
-
-
-
-
-
-
-
+    
+    closeModal.addEventListener('click', () => {
+        if (modal.open) {
+            modal.close()
+            console.log("La modal a été fermer")
+        }
+    })
+})

@@ -279,75 +279,159 @@ footer nav ul {
 
 /*** Ajout de la boite modal ***/
 
-.modal {
-	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.3);
-}
-.modal-wrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	overflow: auto;
-	background-color: #fff;
-	border-radius: 10px;
+ dialog {
+	border: none;
 	width: 630px;
 	height: 688px;
-	position: relative;
-}
+	border-radius: 10px;
+	background: #fff;
+	padding: 0;
+} 
 
-.fa-xmark {
-	position: absolute;
+dialog::backdrop {
+	background: rgba(0, 0, 0, 0.30);
+} 
+
+#modal {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+ 
+#close-modal {
+	border: none;
+	width: 24px;
+	height: 24px;
+	color: #000;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;	
 	top: 26px;
 	right: 30px;
-	cursor: pointer;
+	font-size: 20px;
 }
 
 .titre-modal {
+	margin-top: 60px;
 	color: #000;
-	text-align: center;
 	font-family: Work Sans;
 	font-size: 26px;
 	font-style: normal;
 	font-weight: 400;
-	line-height: normal; 
-	margin-top: 60px;
+	line-height: normal;
 }
 
-.projet-modal{
-	background-color: pink;
-	width: 419px;
-	height: 474px;
-	margin-top: 46px;
-	margin-bottom: 67px;
+#api-container {
+	display: flex;
+	align-items: center;
+	width: 420px;
+	height: 368px;
+	margin: 46px 105px 67px 105px;
 }
 
-.projet-modal::after {
+#api-container::after {
 	content: "";
-	position: absolute;
-	display: block;
 	width: 420px;
 	height: 1px;
-	background: #B3B3B3;
-	bottom: 119px; 
+	background: #b3b3b3;
+	position: absolute;
+ 	bottom: 119px;
+	right: 105px;
 }
-  
+
+.api-container-image {
+	flex-wrap: wrap;
+	width: 78px;
+	height: auto;
+	flex-shrink: 0;
+	justify-content: space-between;
+}
+
+.image-container {
+	position: relative;
+}
+
+.btn-image-sup {
+	position: absolute;
+ 	top: 6px;
+	right: 7px;
+ 	width: 17px;
+	height: 17px;
+	border-radius: 2px;
+	background: #000;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 3px 4px;
+}
+
+.fa-trash-can {
+	width: 9px;
+	height: 11px;
+	color: #FFFFFF;
+	font-size: 10px;
+	text-align: center;
+}
 
 .btn-modal {
-	margin-bottom: 45px;
+	width: 237px;
+	height: 36px;
+	border-radius: 60px;
 	background: #1D6154;
-	color: #FFF;
-	padding: 10px 49px 9px 46px;
+	padding: 10px 49px 9px 49px;
+	color: #fff;
 	text-align: center;
 	font-family: Syne;
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 700;
 	line-height: normal;
+	margin-top: 38px;
+}
+
+/*** Modification de la boite modal pour ajout photos ***/
+
+.btn-retour {
+	width: 21px;
+	height: 21px;
+	position: absolute;
+	top: 26px;
+	left: 30px;
+	padding: 0;
+	border: none;
+}
+
+.fa-arrow-left {
+	width: 21px;
+	height: 21px;
+	color: #000000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+	font-size: 20px;
+}
+
+.container-photo {
+	width: 420px;
+	height: 169px;
+	border-radius: 3px;
+	background: #E8F1F6;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 126px;
+}
+
+.fa-image {
+width: 76px;
+height: 76px;
+color: #B9C5CC;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 76px;
 }
