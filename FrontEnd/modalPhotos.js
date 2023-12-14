@@ -1,54 +1,113 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const modal = document.querySelector('#modal')
-    const closeModal = document.querySelector('#close-modal')
-    const titreModal = document.querySelector('.titre-modal')
-    const apiContainer = document.querySelector('#api-container')
-    const openModalPhotos = document.querySelector('#ajout-photo')
+    const modalPhotos = document.querySelector('#modal2')
+    const openModal2 = document.querySelector('#ajout-photo')
+    const retourModal1 = document.querySelector('#retour-Modal1')
+    const closeModal2 = document.querySelector('#close-modal2')
 
-    const contenuInitial = modal.innerHTML
-
-    openModalPhotos.addEventListener('click', () => {
-
-        const token = localStorage.getItem('token')
-        console.log(token)
-        if (!token) {
-            window.location.href = 'login.html'
-        }
-        console.log('Le token est bien récupérer on passe au reste')
-
-        const apiContainer = document.querySelector('#api-container')
-        apiContainer.innerHTML = ''
-
-        const titreModal = document.querySelector('.titre-modal')
-        titreModal.textContent = 'Ajout photo'
-
-        const retourElement = document.createElement('button')
-        retourElement.classList.add('btn-retour')
-
-        const iconRetour = document.createElement('i')
-        iconRetour.classList.add('fa-solid', 'fa-arrow-left')
-
-        const containerPhoto = document.createElement('div')
-        containerPhoto.classList.add('container-photo')
+    openModal2.addEventListener('click', async (event) => {
+        event.preventDefault()
+        modal.close()
+        modalPhotos.showModal()
         
-        const iconContainerPhoto = document.createElement('i')
-        iconContainerPhoto.classList.add('fa-regular', 'fa-image')
+        // + Ajout l'écouteur d'événement pour revenir a la première modal
+        retourModal1.addEventListener('click', () => {
+            modalPhotos.close()
+            modal.showModal()
+        })
 
-        modal.appendChild(retourElement)
-
-        retourElement.appendChild(iconRetour)
-
-        apiContainer.appendChild(containerPhoto)
-
-        containerPhoto.appendChild(iconContainerPhoto)
+        // ! Appel de la function pour afficher les option de catégories au formulaire
+        await optionFormCategories()
     })
 
-    closeModal.addEventListener('click', () => {
-        if (modal.open) {
-            modal.innerHTML = contenuInitial
+    // ! Fermeture de la modale Ajout photos
+    closeModal2.addEventListener('click', () => {
+        modalPhotos.close()
+    })
 
-            modal.close()
-            console.log("La modal a été fermer")
+    async function optionFormCategories () {
+        const responseCategories = await fetch('http://localhost:5678/api/categories')
+        const categories = await responseCategories.json()
+        const catégorieForm = document.getElementById('catégorie')
+        catégorieForm.innerHTML = ''
+
+        categories.forEach(category => {
+            const optionElement = document.createElement('option')
+            optionElement.innerText = category.name
+            catégorieForm.appendChild(optionElement)
+        })
+    }
+
+    // + Ajouter des photos
+    const ajoutPhotos = document.getElementById('télécharger-photos')
+    const containerAjout = document.querySelector('.container-ajout')
+
+    ajoutPhotos.addEventListener('change', ajouterUnePhoto)
+
+
+    function ajouterUnePhoto () {
+        if (ajoutPhotos.files && ajoutPhotos.files[0]) {
+            const nouvelleObjet = new FileReader()
+            nouvelleObjet.onload = function (event) {
+                containerAjout.innerHTML = ''
+                const imageElement = document.createElement('img')
+                imageElement.src = event.target.result
+                imageElement.classList.add('image')
+                containerAjout.appendChild(imageElement)
+            }
+            nouvelleObjet.readAsDataURL(ajoutPhotos.files[0])
+            console.log(nouvelleObjet)
+        } 
+    }
+
+     const validationFormulaire = document.getElementById('validation-photos')
+    validationFormulaire.addEventListener('submit', soumettreLeFormulaireFormData)
+ 
+    async function validerFormulaire () {
+        const titre = document.getElementById('titre').value
+        const catégorie = document.getElementById('catégorie').value
+
+        if (!titre || !catégorie) {
+            alert('Veuillez remplir tous les champs')
+            return false
         }
-    })
+        return true
+    }
+
+    async function soumettreLeFormulaireFormData (event) {
+        event.preventDefault()
+
+        // ! Valider le formulaire
+        const formulaireValider = await validerFormulaire()
+        if (!formulaireValider) {
+            return
+        }
+
+        const formData = new FormData(validationFormulaire)
+        // formData.append('image', ajoutPhotos.files[0])
+        const image = formData.get('télécharger-photos')
+        console.log(image)
+
+        try {
+            const response = await fetch('http://localhost:5678/api/works', {
+                method: 'POST',
+                headers: {
+                    'accept': 'application/json',
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4',
+                },
+                body: formData
+            })
+
+            const responseData = await response.json()
+            if (response.status === 201) {
+                ajouterProjetALaGalerie(responseData)
+            } else {
+                alert('Échec lors de l\'envoi du formulaire')
+            }
+        } catch (error) {
+            console.log('Erreur: ', error)
+        }
+    }
+    function ajouterProjetALaGalerie() {
+        // a créer 
+    } 
 })
