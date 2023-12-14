@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } 
     }
 
-     const validationFormulaire = document.getElementById('validation-photos')
+    const validationFormulaire = document.getElementById('validation-photos')
     validationFormulaire.addEventListener('submit', soumettreLeFormulaireFormData)
  
     async function validerFormulaire () {
@@ -82,12 +82,20 @@ document.addEventListener('DOMContentLoaded', function () {
             return
         }
 
-        const formData = new FormData(validationFormulaire)
-        // formData.append('image', ajoutPhotos.files[0])
-        const image = formData.get('télécharger-photos')
-        console.log(image)
+        const formAjout = document.getElementById('photos-form')
+        formAjout.addEventListener('submit', ajouterFormulaire)
 
-        try {
+        function ajouterFormulaire (event) {
+            event.preventDefault()
+            const formData = new FormData(validationFormulaire)
+            // formData.append('image', ajoutPhotos.files[0])
+            const telechargerPhotos = formData.get('télécharger-photos')
+            const titre = formData.get('titre')
+            const categorie = formData.get('catégorie')
+            console.log('photos-form', { telechargerPhotos, titre, categorie })
+        }
+
+        /* try {
             const response = await fetch('http://localhost:5678/api/works', {
                 method: 'POST',
                 headers: {
@@ -105,8 +113,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         } catch (error) {
             console.log('Erreur: ', error)
-        }
+        } */
     }
+
     function ajouterProjetALaGalerie() {
         // a créer 
     } 
