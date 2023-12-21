@@ -277,7 +277,8 @@ footer nav ul {
 	margin: 2em
 }
 
-/*** Ajout de la boite modal ***/
+
+/** Commun au deux boite de dialogue**/
 
  dialog {
 	border: none;
@@ -291,6 +292,18 @@ footer nav ul {
 dialog::backdrop {
 	background: rgba(0, 0, 0, 0.30);
 } 
+
+.titre-modal {
+	margin-top: 60px;
+	color: #000;
+	font-family: Work Sans;
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+/*** Boite modal galerie ***/
 
 #modal {
     align-items: center;
@@ -313,19 +326,9 @@ dialog::backdrop {
 	font-size: 20px;
 }
 
-.titre-modal {
-	margin-top: 60px;
-	color: #000;
-	font-family: Work Sans;
-	font-size: 26px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
-}
-
 #api-container {
 	display: flex;
-	align-items: center;
+	align-items: center; 
 	width: 420px;
 	height: 368px;
 	margin: 46px 105px 67px 105px;
@@ -342,11 +345,12 @@ dialog::backdrop {
 }
 
 .api-container-image {
+	display: flex;
+	align-items: flex-start;
+	gap: 7px;
 	flex-wrap: wrap;
 	width: 78px;
 	height: auto;
-	flex-shrink: 0;
-	justify-content: space-between;
 }
 
 .image-container {
@@ -392,9 +396,31 @@ dialog::backdrop {
 	margin-top: 38px;
 }
 
-/*** Modification de la boite modal pour ajout photos ***/
+/*** Boite modal photos ***/
 
-.btn-retour {
+#modal2 {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#close-modal2 {
+	border: none;
+	width: 24px;
+	height: 24px;
+	color: #000;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;	
+	top: 26px;
+	right: 30px;
+	font-size: 20px;
+}
+
+
+#retour-Modal1{
 	width: 21px;
 	height: 21px;
 	position: absolute;
@@ -415,23 +441,141 @@ dialog::backdrop {
 	font-size: 20px;
 }
 
-.container-photo {
+#api-container2 {
+	width: 420px;
+	height: 368px;
+	margin: 46px 105px 67px 105px;
+}
+
+#api-container2::after {
+	content: "";
+	width: 420px;
+	height: 1px;
+	background: #b3b3b3;
+	position: absolute;
+ 	bottom: 119px;
+	right: 105px;
+}
+
+.container-ajout {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	width: 420px;
 	height: 169px;
 	border-radius: 3px;
 	background: #E8F1F6;
-	display: flex;
-	flex-direction: column;
-	position: absolute;
-	top: 126px;
 }
 
 .fa-image {
-width: 76px;
-height: 76px;
-color: #B9C5CC;
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 76px;
+	width: 76px;
+	height: 76px;
+	color: #B9C5CC;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 76px;
+	margin-top: 13px;
+}
+
+.style-input {
+    display: none;
+}
+
+.style-label {
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	background: #CBD6DC;
+	color: #306685;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal; 
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 6px;
+}
+
+.style-input + p {
+	color: #444;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+    margin-top: 7px;	
+}
+
+.info-image {
+	display: flex;
+	flex-direction: column;
+	margin-top: 30px;
+}
+
+.info-titre, .info-categorie {
+	color: #3d3d3d;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	text-align: left;
+}
+
+#title {
+	width: auto;
+	height: 51px;
+	background: #fff;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09); 
+	margin: 10px 0 21px 0;
+	border: none;
+}
+
+#category {
+	width: auto;
+	height: 51px;
+	background: #fff;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09); 
+	margin-top: 10px;
+	border: none;
+}
+
+.btn-modal2 {
+	width: 237px;
+	height: 36px;
+	border-radius: 60px;
+	background: #A7A7A7;
+	padding: 10px 49px 9px 49px;
+	color: #fff;
+	text-align: center;
+	font-family: Syne;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	margin-top: 38px;
+	border: none;
+}
+
+.image {
+	position: absolute;
+	width: 129px;
+    height: auto;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	object-fit: cover;
+}
+
+.container-ajout.image-visible .fa-image,
+.container-ajout.image-visible .style-label,
+.container-ajout.image-visible .style-input {
+  visibility: hidden;
 }
