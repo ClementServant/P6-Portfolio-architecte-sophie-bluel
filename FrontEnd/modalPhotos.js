@@ -1,4 +1,3 @@
-import { galerieProjects } from './works.js'
 
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.querySelector('#modal')
@@ -88,7 +87,10 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
             if (response.ok) {
-                revenirSurLaModalSiResponseOk()
+                modalPhotos.close()
+                console.log('La modalPhotos a été fermer')
+                modal.showModal()
+                console.log('La modal galerie a été ouverte')
             } else {
                 alert('Échec lors de l\'envoi du formulaire')
             }
@@ -98,13 +100,3 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 })
 
-async function revenirSurLaModalSiResponseOk (event) {
-    event.preventDefault()
-    const modal = document.querySelector('#modal')
-    const modalPhotos = document.querySelector('#modal2')
-    // const apiContainer = document.querySelector('#api-container')
-
-    modalPhotos.close()
-    modal.showModal()
-     await galerieProjects()
-}
