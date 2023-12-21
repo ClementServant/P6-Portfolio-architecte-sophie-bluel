@@ -1,3 +1,5 @@
+import { galerieProjects } from './works.js'
+
 document.addEventListener('DOMContentLoaded', function () {
   const modal = document.querySelector('#modal')
   const openModal = document.querySelector('#open-modal')
@@ -14,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     const data = await response.json()
+
     const apiContainer = document.querySelector('#api-container')
     apiContainer.innerHTML = ''
 
@@ -48,18 +51,17 @@ document.addEventListener('DOMContentLoaded', function () {
             Authorization: `Bearer ${token}`
           }
         })
-        console.log(response)
-        try {
-          const responseData = await response.json()
-          if (response.status === 200 && responseData.message === 'Item Deleted') {
-            console.log(responseData)
-            imageContainer.remove()
-            location.reload()
-          } else {
-            alert('Erreur lors de la suppression de l\'image')
-          }
-        } catch (error) {
-          alert("Erreur lors de la suppression de l'image : la réponse du serveur n'est pas du JSON valide")
+
+        const gallery = document.querySelector('.gallery')
+
+        if (response.ok) {
+          // ! Actualisation de la boite modal
+          imageContainer.remove()
+          // ! je vide la galerie et j'appel ma function pour afficher les projets dynamiquement
+          gallery.innerHTML = ''
+          await galerieProjects()
+        } else {
+          alert('Erreur lors de la suppression de l\'image')
         }
       })
     }
