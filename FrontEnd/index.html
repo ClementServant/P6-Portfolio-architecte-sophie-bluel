@@ -36,20 +36,20 @@
 		<h1 class="titre-modal">Ajout photo</h1>
 		<form id="photos-form" name="envoy-fichier" enctype="multipart/form-data" method="post" action="">
 			<div id="api-container2">
-
+				<!-- Ajouter une photos -->
 				<div class="container-ajout">
 					<i class="fa-regular fa-image"></i>
-					<label for="télécharger-photos" class="style-label">+ Ajouter photo</label>
-					<input id="télécharger-photos" name="télécharger-photos" type="file" class="style-input">
+					<label for="image" class="style-label">+ Ajouter photo</label>
+					<input id="image" name="image" type="file" class="style-input" required>
 					<p>jpg, png : 4mo max</p>
 				</div>
-				
+				<!-- Ajouter un titre et une catégories -->
 				<div class="info-image">
-					<label class="info-titre" for="titre">Titre</label>
-					<input type="text" id="titre" name="titre">
-					<label class="info-categorie" for="catégorie">Catégorie</label>
-					<select name="catégorie" id="catégorie">
-						
+					<label class="info-titre" for="title">Titre</label>
+					<input type="text" id="title" name="title" required>
+					<label class="info-categorie" for="category">Catégorie</label>
+					<select name="category" id="category" required>
+
 					</select>
 				</div>
 			</div>
@@ -69,7 +69,7 @@
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li><a href="./login.html">login</a></li> <!--Rajouter un id pour le recuperer -->
+				<li><a href="./login.html">login</a></li> <!--Rajouter un id pour le récupérer -->
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
