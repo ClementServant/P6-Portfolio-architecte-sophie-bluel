@@ -67,6 +67,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
+  window.addEventListener('click', function (event) {
+    if (event.target === modal) {
+      modal.close()
+    }
+  })
+
   closeModal.addEventListener('click', () => {
     modal.close()
   })
