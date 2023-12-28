@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     headerMargin.classList.add('login')
 
     // ! Modification de l'apparence du lien de la navbar
-    const login = document.querySelector('nav ul li a')
+    const login = document.querySelector('#login')
     login.innerText = 'logout'
 
     // ! de l’écouteur d’événement sur l'element logout
@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // ! Réinitialisation de l'apparence du lien de la navbar
       login.innerText = 'login'
       alert('Vous êtes déconnecter')
-      window.location.href = 'index.html'
     })
   }
 })

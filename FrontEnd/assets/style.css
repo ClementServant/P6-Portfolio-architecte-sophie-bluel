@@ -329,9 +329,10 @@ dialog::backdrop {
 #api-container {
 	display: flex;
 	align-items: center; 
-	width: 420px;
+	width: auto;
 	height: 368px;
 	margin: 46px 105px 67px 105px;
+	overflow: auto;
 }
 
 #api-container::after {
@@ -442,7 +443,7 @@ dialog::backdrop {
 }
 
 #api-container2 {
-	width: 420px;
+	width: auto;
 	height: 368px;
 	margin: 46px 105px 67px 105px;
 }
@@ -462,7 +463,7 @@ dialog::backdrop {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 420px;
+	width: auto;
 	height: 169px;
 	border-radius: 3px;
 	background: #E8F1F6;

@@ -15,6 +15,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const titleInput = document.getElementById('title')
     titleInput.value = ''
 
+    //  ! Vérifier si image présente et la supprimer
+    const imageDejaPresent = containerAjout.querySelector('.image')
+    if (imageDejaPresent) {
+      containerAjout.removeChild(imageDejaPresent)
+      containerAjout.classList.remove('image-visible')
+    }
+
     // + Ajout écouteur d'événement pour revenir a la première modal
     retourModal1.addEventListener('click', () => {
       modalPhotos.close()
@@ -24,16 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     await optionFormCategories()
   })
 
-  window.addEventListener('click', function (event) {
-    if (event.target === modalPhotos) {
-      modalPhotos.close()
-    }
-  })
-
-  closeModal2.addEventListener('click', () => {
-    modalPhotos.close()
-  })
-
+  // + Function pour afficher les categories
   async function optionFormCategories () {
     const responseCategories = await fetch('http://localhost:5678/api/categories')
     const categories = await responseCategories.json()
@@ -82,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
+  // + Soumettre le formulaire
   formDataFormulaire.addEventListener('submit', soumettreLeFormulaireFormData)
 
   async function soumettreLeFormulaireFormData (event) {
@@ -101,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         body: formData
       })
 
+      // ! Redirection modalGalerie si response ok et actualisation de la modal et de la galerie
       if (response.ok) {
         modalPhotos.close()
         modal.showModal()
@@ -111,4 +111,15 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
+  // + Fermer la modal en cliquant hors de la modal
+  window.addEventListener('click', function (event) {
+    if (event.target === modalPhotos) {
+      modalPhotos.close()
+    }
+  })
+
+  // + Fermer la modalPhotos en cliquant sur le bouton de fermeture
+  closeModal2.addEventListener('click', () => {
+    modalPhotos.close()
+  })
 })
